@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/IH-EventsApp.iml" filepath="$PROJECT_DIR$/.idea/IH-EventsApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Eventful.iml" filepath="$PROJECT_DIR$/.idea/modules/Eventful.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/Eventful.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/Eventful.app.iml" />
     </modules>
   </component>
 </project>
