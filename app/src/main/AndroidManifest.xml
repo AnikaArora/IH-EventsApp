@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.eventful">
+    package="com.example.eventful" >
 
     <application
         android:allowBackup="true"
@@ -8,10 +8,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Eventful">
+        android:theme="@style/Theme.Eventful" >
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main2" >
+        </activity>
+        <activity
+            android:name=".EventListing"
+            android:label="@string/title_activity_event_listing" >
+        </activity>
+        <activity
+            android:name=".Event_Listings"
+            android:label="@string/title_activity_event_listings" >
+        </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
