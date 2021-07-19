@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.DashboardFragment">
 
+    <!-- Filter Options -->
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -15,14 +16,31 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingBottom="10dp">
+
+            <Button
+                android:id="@+id/category_button1"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/button_custom"
+                android:text="@string/category"
+                android:textColor="@drawable/button_text_color"
+                app:backgroundTint="@null"
+                app:layout_constraintStart_toStartOf="parent"
+
+                />
 
             <Button
                 android:id="@+id/category_button2"
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/button_custom"
                 android:text="@string/category"
+                android:textColor="@drawable/button_text_color"
+                app:backgroundTint="@null"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
@@ -30,7 +48,10 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/button_custom"
                 android:text="@string/category"
+                android:textColor="@drawable/button_text_color"
+                app:backgroundTint="@null"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
@@ -38,7 +59,10 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/button_custom"
                 android:text="@string/category"
+                android:textColor="@drawable/button_text_color"
+                app:backgroundTint="@null"
                 app:layout_constraintStart_toStartOf="parent" />
 
             <Button
@@ -46,18 +70,15 @@
                 android:layout_width="120dp"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
+                android:background="@drawable/button_custom"
                 android:text="@string/category"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <Button
-                android:id="@+id/category_button6"
-                android:layout_width="120dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="@string/category"
+                android:textColor="@drawable/button_text_color"
+                app:backgroundTint="@null"
                 app:layout_constraintStart_toStartOf="parent" />
         </LinearLayout>
 
     </HorizontalScrollView>
+
+    <!-- Card Layout-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
