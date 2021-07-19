@@ -8,6 +8,7 @@
 
     <!-- Filter Options -->
     <HorizontalScrollView
+        android:id="@+id/button_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -80,5 +81,15 @@
     </HorizontalScrollView>
 
     <!-- Card Layout-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/button_scroll"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layoutManager="LinearLayoutManager"
+        android:scrollbars="vertical"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
