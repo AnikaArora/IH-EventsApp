@@ -6,4 +6,5 @@
     <string name="title_activity_event_listings">MainActivity</string>
     <string name="title_activity_event_listing">MainActivity</string>
     <string name="title_activity_main2">MainActivity</string>
+    <string name="category">Category</string>
 </resources>
