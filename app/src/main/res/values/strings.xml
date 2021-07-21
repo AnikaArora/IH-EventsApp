@@ -6,5 +6,9 @@
     <string name="title_activity_event_listings">MainActivity</string>
     <string name="title_activity_event_listing">MainActivity</string>
     <string name="title_activity_main2">MainActivity</string>
+
     <string name="category">Category</string>
+    <string name="event_title_example">Event Name</string>
+    <string name="event_logistics_example">Time and Address</string>
+    <string name="distance_example">5 miles</string>
 </resources>
