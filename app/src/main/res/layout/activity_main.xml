@@ -6,6 +6,9 @@
     android:layout_height="match_parent"
     android:paddingTop="?attr/actionBarSize">
 
+    <include android:id="@+id/weather_widget_main"
+        layout="@layout/weather_widget"/>
+
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
         android:layout_width="0dp"
