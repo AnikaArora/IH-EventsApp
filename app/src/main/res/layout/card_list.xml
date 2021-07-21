@@ -32,6 +32,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:textAppearance="?attr/textAppearanceHeadline6"
                 tools:text="Event Title" />
 
             <TextView
@@ -49,7 +50,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:gravity="right"
-            tools:text="5 miles" />
+            tools:text="5 miles"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"/>
 
 
     </LinearLayout>
