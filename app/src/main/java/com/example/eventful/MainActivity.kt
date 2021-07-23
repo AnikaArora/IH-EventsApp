@@ -1,6 +1,7 @@
 package com.example.eventful
 
 import android.os.Bundle
+import android.widget.Button
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -60,4 +61,9 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
     }
+
+//    val rect1=findViewById<Button>(R.id.rect1);
+//    val rect2=findViewById<Button>(R.id.rect2);
+//    val rect3=findViewById<Button>(R.id.rect3);
+
 }
