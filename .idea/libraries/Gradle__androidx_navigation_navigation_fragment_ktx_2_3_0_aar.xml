@@ -2,9 +2,15 @@
   <library name="Gradle: androidx.navigation:navigation-fragment-ktx:2.3.0@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4b8dcc6aabcd275915fff30775d23c4c/navigation-fragment-ktx-2.3.0/res" />
+<<<<<<< HEAD
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/040daf4eb662687089aadfdd11e04c0b/navigation-fragment-ktx-2.3.0/res" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/040daf4eb662687089aadfdd11e04c0b/navigation-fragment-ktx-2.3.0/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/040daf4eb662687089aadfdd11e04c0b/navigation-fragment-ktx-2.3.0/AndroidManifest.xml" />
+=======
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c6c840a8683ca0157dada8aa8a0196f4/navigation-fragment-ktx-2.3.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c6c840a8683ca0157dada8aa8a0196f4/navigation-fragment-ktx-2.3.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/c6c840a8683ca0157dada8aa8a0196f4/navigation-fragment-ktx-2.3.0/AndroidManifest.xml" />
+>>>>>>> 12873a0e22214ccdb44e6bd2d21077d2ed24d3ba
     </CLASSES>
     <JAVADOC />
     <SOURCES>
