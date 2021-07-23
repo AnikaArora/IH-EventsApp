@@ -1,21 +1,12 @@
 <component name="libraryTable">
   <library name="Gradle: androidx.coordinatorlayout:coordinatorlayout:1.1.0@aar">
     <ANNOTATIONS>
-<<<<<<< HEAD
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a0afa875da8d04ba9777b035fa67c483/coordinatorlayout-1.1.0/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8314bda5d46ef8a719e212add8b234c8/coordinatorlayout-1.1.0/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a0afa875da8d04ba9777b035fa67c483/coordinatorlayout-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a0afa875da8d04ba9777b035fa67c483/coordinatorlayout-1.1.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/a0afa875da8d04ba9777b035fa67c483/coordinatorlayout-1.1.0/res" />
-=======
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/758d3c719688e36ec0a4bcbf29d77ec0/coordinatorlayout-1.1.0/annotations.zip!/" />
-    </ANNOTATIONS>
-    <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/758d3c719688e36ec0a4bcbf29d77ec0/coordinatorlayout-1.1.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/758d3c719688e36ec0a4bcbf29d77ec0/coordinatorlayout-1.1.0/AndroidManifest.xml" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/758d3c719688e36ec0a4bcbf29d77ec0/coordinatorlayout-1.1.0/res" />
->>>>>>> 12873a0e22214ccdb44e6bd2d21077d2ed24d3ba
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8314bda5d46ef8a719e212add8b234c8/coordinatorlayout-1.1.0/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8314bda5d46ef8a719e212add8b234c8/coordinatorlayout-1.1.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/8314bda5d46ef8a719e212add8b234c8/coordinatorlayout-1.1.0/AndroidManifest.xml" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>
