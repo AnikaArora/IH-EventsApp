@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.eventful">
+    package="com.example.eventful" >
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -15,6 +15,21 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< HEAD
+        android:theme="@style/Theme.Eventful" >
+        <activity
+            android:name=".MainActivity2"
+            android:label="@string/title_activity_main2" >
+        </activity>
+        <activity
+            android:name=".EventListing"
+            android:label="@string/title_activity_event_listing" >
+        </activity>
+        <activity
+            android:name=".Event_Listings"
+            android:label="@string/title_activity_event_listings" >
+        </activity>
+=======
         android:theme="@style/Theme.Eventful">
         <uses-library android:name="com.google.android.maps" />
         <!--
@@ -30,9 +45,10 @@
             android:value="${MAPS_API_KEY}" />
 
 
+>>>>>>> 12873a0e22214ccdb44e6bd2d21077d2ed24d3ba
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
