@@ -3,7 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-<<<<<<< HEAD
+
     <string name="title_activity_event_listings">MainActivity</string>
     <string name="title_activity_event_listing">MainActivity</string>
     <string name="title_activity_main2">MainActivity</string>
@@ -12,7 +12,7 @@
     <string name="event_title_example">Event Name</string>
     <string name="event_logistics_example">Time and Address</string>
     <string name="distance_example">5 miles</string>
-=======
+
     <string name="title_activity_maps">Map</string>
->>>>>>> 12873a0e22214ccdb44e6bd2d21077d2ed24d3ba
+
 </resources>

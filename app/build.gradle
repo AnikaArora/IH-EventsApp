@@ -14,7 +14,6 @@ android {
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -32,12 +31,10 @@ android {
         jvmTarget = '1.8'
     }
     buildFeatures {
-<<<<<<< HEAD
+
         viewBinding = true
-=======
+
         dataBinding true
-        viewBinding true
->>>>>>> 12873a0e22214ccdb44e6bd2d21077d2ed24d3ba
     }
 }
 
