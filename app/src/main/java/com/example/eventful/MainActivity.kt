@@ -2,12 +2,18 @@ package com.example.eventful
 
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonObjectRequest
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.eventful.databinding.ActivityMainBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -41,6 +47,48 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+
+
+        val textView = findViewById<TextView>(R.id.text)
+        // ...
+
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
+        val city = "Sacramento"
+        val url = "https://app.ticketmaster.com/discovery/v2/events.json?city=$city&apikey={apikey}"
+
+        class EventDetails {
+            lateinit var title: String
+            lateinit var address: String
+        }
+
+        var listOfEvents = mutableListOf<EventDetails>()
+
+
+        // Request a string response from the provided URL.
+        val jsonRequest = JsonObjectRequest(
+            Request.Method.GET, url, null,
+            { response ->
+                // Display the first 500 characters of the response string.
+                val jsonObject = response.getJSONObject("_embedded")
+                val eventsArr = jsonObject.getJSONArray("events")
+                for(i in 0 until eventsArr.length()) {
+                    val event = eventsArr.getJSONObject(i)
+                    val eventInstance = EventDetails()
+                    val addressObject = event.getJSONObject("_embedded").getJSONObject("venues")
+
+                    eventInstance.title = event.getString("name")
+                    eventInstance.address = addressObject.getJSONObject("address").getString("line1")
+
+                    listOfEvents.add(eventInstance)
+                }
+
+            },
+            {  })
+
+        // Add the request to the RequestQueue.
+//        queue.add(JsonObjectRequest)
     }
 
     /**
