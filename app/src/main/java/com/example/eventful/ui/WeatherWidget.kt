@@ -3,15 +3,25 @@ package com.example.eventful.ui
 import android.Manifest
 import android.content.Context
 import android.content.pm.PackageManager
+import android.icu.number.NumberFormatter.with
 import android.location.*
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
+import com.android.volley.Request
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.*
+import com.example.eventful.CITY
 import com.example.eventful.R
 import com.example.eventful.databinding.WeatherWidgetBinding
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import com.squareup.picasso.Picasso
+import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.Exception
 import java.net.URL
@@ -19,95 +29,48 @@ import java.util.*
 
 class WeatherWidget(private val weatherView: WeatherWidgetBinding) {
 
-    var CITY: String? = null
     var API: String = "991c4746ce85b4c70a462313962cd22a"
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var context : Context
 
-    suspend fun init(context: Context) {
-        // class for api call
+    fun init(context: Context) {
         this.context = context
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.context)
         Log.d("weatherWidget", "start of init")
-        CITY = getLocation()
         Log.d("City", "CITY = $CITY")
-        val result = handler()
-        postApiCall(result)
 
-    }
+        val queue = Volley.newRequestQueue(this.context)
+        val url = "https://api.openweathermap.org/data/2.5/weather?q=$CITY&appid=$API"
 
-    private suspend fun handler(): String? {
-        return apiCall()
-    }
-
-    private fun getLocation(): String? {
-
-//        var locationManager : LocationManager? = getSystemService(context, ) as LocationManager?
-//        var criteria : Criteria = Criteria()
-//        var provider : String? = locationManager?.getBestProvider(criteria, true)
-//        val location : Location? = locationManager?.getLastKnownLocation(provider)
-        var lat : Double
-        var lon : Double
-        val geocoder : Geocoder = Geocoder(this.context, Locale.getDefault())
-        var addressList : List<Address?>
-        var address : String? = null
-
-        if (ActivityCompat.checkSelfPermission(
-                this.context,
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
-                this.context,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-        }
-        fusedLocationClient.lastLocation.addOnSuccessListener {
-                location : Location? ->
-            if (location != null) {
-                lat = location.latitude
-                lon = location.longitude
-                addressList = geocoder.getFromLocation(lat, lon, 1)
-                address = addressList[0].toString()
-            }
-        }
-        return address
-    }
-
-    //override doInBackground()
-    private suspend fun apiCall(): String? {
-        var response:String?
-        try {
-            response = URL("api.openweathermap.org/data/2.5/weather?q=$CITY&appid=$API").readText(Charsets.UTF_8)
-        } catch (e: Exception) {
-            response = null
-        }
-        return response
+        val jsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
+            { response ->
+                postApiCall(response)
+                Log.d("response", "Post API response = $response")
+        },
+            {error -> Log.d("error", "Post API error = $error")  })
+        queue.add(jsonObjectRequest)
     }
 
     //override onPostExecute()
-    private fun postApiCall(result: String?) {
-        try {
-            val jsonObj = JSONObject(result)
-            val main = jsonObj.getJSONObject("main")
-            val temp = main.getString("temp") + "\u2103"
-            val weather = jsonObj.getJSONObject("weather")
-            val conditions = weather.getJSONObject("main")
-            val icon = weather.getJSONObject("icon")
+    private fun postApiCall(result: JSONObject) {
+            try {
+                val main = result.getJSONObject("main")
+                val temp = main.getString("temp") + "\u2103"
+                val weather = result.getJSONObject("weather")
+                val conditions = weather.getJSONObject("main").toString()
+                val icon = weather.getJSONObject("icon").toString()
+                val iconURL = "http://openweathermap.org/img/w/$icon.png"
 
-            val v : View = weatherView.mainContainer
+                val v : View = weatherView.mainContainer
 
-            v.findViewById<TextView>(R.id.temperature).text = temp
+                v.findViewById<TextView>(R.id.temperature).text = temp
+                v.findViewById<TextView>(R.id.location).text = CITY
+                v.findViewById<TextView>(R.id.conditions).text = conditions
+                Picasso.get().load(iconURL).resize(30,30).into(v.findViewById<ImageView>(R.id.icon))
 
-        } catch (e: Exception) {
+            } catch (e: Exception) {
 
-        }
+            }
     }
 }
