@@ -1,6 +1,7 @@
 package com.example.eventful
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -35,6 +36,8 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
 import kotlinx.coroutines.processNextEventInCurrentThread
 
 class EventDetails {
@@ -44,7 +47,7 @@ class EventDetails {
     lateinit var latitude: String
 }
 
-lateinit var CITY: String
+var CITY: String = "Mountain View"
 var listOfEvents = mutableListOf<EventDetails>()
 class MainActivity : AppCompatActivity() {
 
@@ -55,32 +58,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        // setContentView(R.layout.activity_main)
-
-        CITY = getLocation()
+        val deferred = GlobalScope.async{CITY = getLocation()}
+        deferred.onAwait
+//        Log.d("City", "CITY = $CITY")
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-
-        val navView: BottomNavigationView = binding.navView
-
-        val weatherWidget: WeatherWidgetBinding = binding.weatherWidgetMain
-
-        val weatherView: WeatherWidget = WeatherWidget(weatherWidget)
-
-        val appContext = applicationContext
-        weatherView.init(appContext)
-
-        val navController = findNavController(R.id.nav_host_fragment_activity_main)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-
-
 
         val textView = findViewById<TextView>(R.id.text)
         // ...
@@ -111,55 +93,66 @@ class MainActivity : AppCompatActivity() {
                     val latitude = addressObject.getJSONObject("location").optString("latitude")
                     eventInstance.longitude = longitude
                     eventInstance.latitude = latitude
+                    Log.d("Latitude", "Latitude = $latitude")
+                    Log.d("Longitude", "Longitude = $longitude")
 
                     listOfEvents.add(eventInstance)
-
                 }
-        // Add the request to the RequestQueue.
-//        queue.add(JsonObjectRequest)
+            },
+                { error -> Log.d("error", error.toString()) })
+        queue.add(jsonRequest)
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        val navView: BottomNavigationView = binding.navView
+
+        val navController = findNavController(R.id.nav_host_fragment_activity_main)
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        val appBarConfiguration = AppBarConfiguration(setOf(
+            R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications))
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
 
     }
 
+
+    @SuppressLint("MissingPermission")
     private fun getLocation(): String {
 
-        var lat : Double
-        var lon : Double
-        val geocoder : Geocoder = Geocoder(this, Locale.getDefault())
-        var addressList : List<Address?>
+        var lat: Double
+        var lon: Double
+        val geocoder: Geocoder = Geocoder(this, Locale.getDefault())
+        var addressList: List<Address?>
         var address = "Dallas"
 
-        val requestPermissionLauncher =
-            registerForActivityResult(
-                ActivityResultContracts.RequestPermission()
-            ) { isGranted: Boolean ->
-                if (isGranted) {
-                    // Permission is granted. Continue the action or workflow in your
-                    // app.
-                    if (ActivityCompat.checkSelfPermission(
-                            this,
-                            Manifest.permission.ACCESS_COARSE_LOCATION
-                        ) == PackageManager.PERMISSION_GRANTED
-                    ) {
-                        fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
-                            if (location != null) {
-                                lat = location.latitude
-                                lon = location.longitude
-                                addressList = geocoder.getFromLocation(lat, lon, 1)
-                                address = addressList[0].toString()
+        val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()
+                ) { isGranted: Boolean ->
+                    if (isGranted) {
+                        if (ActivityCompat.checkSelfPermission(
+                                        this,
+                                        Manifest.permission.ACCESS_COARSE_LOCATION
+                                ) == PackageManager.PERMISSION_GRANTED
+                        ) {fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                                if (location != null) {
+                                    lat = location.latitude
+                                    lon = location.longitude
+                                    addressList = geocoder.getFromLocation(lat, lon, 1)
+                                    address = addressList[0]!!.locality
+                                    Log.d("address", "address = $addressList")
+                                    Log.d("address", "address = $address")
+                                    CITY = address
+                                }
                             }
                         }
+
                     }
-
                 }
-            }
 
+        requestPermissionLauncher.launch(Manifest.permission.ACCESS_COARSE_LOCATION)
+        Log.d("address outside of call", "address = $address")
         return address
-    }
-
-            },
-            { error -> Log.d("error", error.toString()) })
-            queue.add(jsonRequest)
-
     }
 
 }
