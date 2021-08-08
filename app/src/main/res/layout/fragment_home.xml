@@ -8,62 +8,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <include android:id="@+id/weather_widget_main"
-        layout="@layout/weather_widget"/>
-
-<!--    <include-->
-<!--        android:id="@+id/mapsActivityMain"-->
-<!--        layout="@layout/fragment_maps"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/weather_widget_main"-->
-<!--        app:layout_constraintVertical_bias="1.0" />-->
-
-    <fragment xmlns:map="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/weather_widget_main"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        tools:layout_editor_absoluteX="0dp"-->
-<!--        tools:layout_editor_absoluteY="65dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/mapsActivityMain"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent"-->
-<!--        app:layout_constraintVertical_bias="0.673">-->
-
-
-<!--        <Button-->
-<!--            android:id="@+id/rect1"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="15dp"-->
-<!--            android:layout_marginRight="15dp"-->
-<!--            android:text="button1" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/rect2"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="15dp"-->
-<!--            android:layout_marginRight="15dp"-->
-<!--            android:text="button2" />-->
-
-<!--        <Button-->
-<!--            android:id="@+id/rect3"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="15dp"-->
-<!--            android:layout_marginRight="15dp"-->
-<!--            android:text="button3" />-->
-
-<!--    </LinearLayout>-->
+        layout="@layout/weather_widget"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

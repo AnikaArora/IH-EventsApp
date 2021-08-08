@@ -39,6 +39,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
 import kotlinx.coroutines.processNextEventInCurrentThread
+import org.json.JSONArray
+import org.json.JSONObject
 
 class EventDetails {
     lateinit var title: String
@@ -47,7 +49,10 @@ class EventDetails {
     lateinit var latitude: String
 }
 
-var CITY: String = "Mountain View"
+lateinit var CITY: String
+lateinit var temp: String
+lateinit var conditions: String
+lateinit var iconURL: String
 var listOfEvents = mutableListOf<EventDetails>()
 class MainActivity : AppCompatActivity() {
 
@@ -55,20 +60,41 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
 
+    private var API: String = "991c4746ce85b4c70a462313962cd22a"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
         val deferred = GlobalScope.async{CITY = getLocation()}
         deferred.onAwait
-//        Log.d("City", "CITY = $CITY")
+        Log.d("City", "CITY = $CITY")
 
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+        Log.d("weatherWidget", "start of init")
+
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
+        val weatherurl = "https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=imperial&appid=$API"
+
+        val jsonObjectRequest = JsonObjectRequest(
+            Request.Method.GET, weatherurl, null,
+            { response ->
+                val main = response.getJSONObject("main")
+                temp = main.getString("temp") + "\u2103"
+                val weather = response.getJSONArray("weather")
+                conditions = weather.getJSONObject(0).getString("main")
+                val icon = weather.getJSONObject(0).getString("icon")
+                iconURL = "https://openweathermap.org/img/w/$icon.png"
+                Log.d("response", "Post API response = $response")
+            },
+            {error -> Log.d("error", "Post API error = $error")  })
+        queue.add(jsonObjectRequest)
 
         val textView = findViewById<TextView>(R.id.text)
         // ...
 
         // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(this)
         val city = "Denver"
         val url = "https://app.ticketmaster.com/discovery/v2/events.json?city=$city&apikey=t3Pw9IXSSkl3TrReE9v2nrm238YfhoXb"
 
