@@ -8,6 +8,7 @@
     tools:context=".ui.home.HomeFragment">
 
     <include android:id="@+id/weather_widget_main"
-        layout="@layout/weather_widget"/>
+        layout="@layout/weather_widget"
+        app:layout_constraintTop_toTopOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

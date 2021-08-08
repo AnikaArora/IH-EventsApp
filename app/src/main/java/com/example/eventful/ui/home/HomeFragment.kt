@@ -13,10 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.eventful.CITY
-import com.example.eventful.R
+import com.example.eventful.*
 import com.example.eventful.databinding.FragmentHomeBinding
-import com.example.eventful.listOfEvents
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -55,7 +53,7 @@ class HomeFragment : Fragment() {
         val v : View = root.findViewById(R.id.fragment_home_container)!!
 
         if (savedInstanceState == null) {
-            init(this.requireContext(), v)
+            populateView(v)
         }
 
         return root
@@ -66,33 +64,9 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    private fun init(context: Context, v : View) {
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(context)
-        Log.d("weatherWidget", "start of init")
-//        Log.d("City", "CITY = $CITY")
-
-        val queue = Volley.newRequestQueue(context)
-        val url = "https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=imperial&appid=$API"
-
-        val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET, url, null,
-            { response ->
-                postApiCall(response, v)
-                Log.d("response", "Post API response = $response")
-            },
-            {error -> Log.d("error", "Post API error = $error")  })
-        queue.add(jsonObjectRequest)
-    }
-
     //override onPostExecute()
-    private fun postApiCall(result: JSONObject, v : View) {
+    private fun populateView(v : View) {
         try {
-            val main = result.getJSONObject("main")
-            val temp = main.getString("temp") + "\u2103"
-            val weather = result.getJSONArray("weather")
-            val conditions = weather.getJSONObject(0).getString("main")
-            val icon = weather.getJSONObject(0).getString("icon")
-            val iconURL = "https://openweathermap.org/img/w/$icon.png"
 
             v.findViewById<TextView>(R.id.temperature).text = temp
             v.findViewById<TextView>(R.id.location).text = CITY
